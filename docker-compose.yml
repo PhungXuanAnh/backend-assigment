@@ -1,0 +1,87 @@
+version: '3.8'
+
+x-default: &default
+  env_file:
+    - env_file
+  logging:
+    driver: "json-file"
+    options:
+      max-size: "100M"
+      max-file: "3"
+  networks:
+    - internal-network
+
+services:
+  django_api:
+    <<: *default
+    image: api:latest
+    build: 
+      context: .
+      dockerfile: src_django/Dockerfile
+    volumes:
+      - ./src_django:/app
+    container_name: django_api
+    ports:
+      - 8000:8000
+      - 5678:5678
+      - 6678:6678
+    command:
+      - /bin/bash
+      - -c
+      - |
+        python3 manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - postgres
+      - redis
+
+  fast_api:
+    <<: *default
+    image: fast_api:latest
+    build: 
+      context: .
+      dockerfile: src_fastapi/Dockerfile
+    volumes:
+      - ./src_fastapi:/app
+    container_name: fastapi
+    environment:
+      - ENVIRONMENT=local
+    ports:
+      - 8001:8001
+      - 5679:5679
+    command:
+      - /bin/bash
+      - -c
+      - |
+        uvicorn main:app --reload --host 0.0.0.0 --port 8001
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    <<: *default
+    image: postgres:15
+    container_name: db
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    <<: *default
+    image: bitnami/redis:5.0
+    container_name: redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 6379:6379
+    volumes:
+      - redis_data:/data/
+    hostname: redis
+
+networks:
+  internal-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:

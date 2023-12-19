@@ -1,0 +1,56 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Docker-django",
+            "type": "python",
+            "request": "attach",
+            "justMyCode": false,
+            "connect": {
+                "host": "localhost",
+                "port": 5678
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}/src_django",
+                    "remoteRoot": "/app",
+                }
+            ]
+        },
+        {
+            "name": "Test-django",
+            "type": "python",
+            "request": "attach",
+            "justMyCode": false,
+            "connect": {
+                "host": "localhost",
+                "port": 6678
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}/src_django",
+                    "remoteRoot": "/app",
+                }
+            ]
+        },
+        {
+            "name": "Test-fastapi",
+            "type": "python",
+            "request": "attach",
+            "justMyCode": false,
+            "connect": {
+                "host": "localhost",
+                "port": 5679
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}/src_fastapi",
+                    "remoteRoot": "/app",
+                }
+            ]
+        },
+    ]
+}

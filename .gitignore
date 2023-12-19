@@ -1,0 +1,26 @@
+.venv
+__pycache__
+tmp.py
+db.sqlite3
+.DS_Store
+**/logs/*
+static_files
+
+celerybeat*
+
+
+# sonar-scanner gen file
+.sonar_lock
+report-task.txt
+.scannerwork/*
+
+certbot/*
+
+local development files
+docker-compose.local.yml
+local.txt
+local.py
+Makefile.local
+temp.sh
+swagger_official.bk
+templates.bk

@@ -1,0 +1,10 @@
+SECRET_KEY=8khss#nb@$*(blml2q@jwvaz!ehxq8qtq29=49!vhf3ck1r)9r
+
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_USER=root
+POSTGRES_PASSWORD=1234_password
+POSTGRES_DB=omni_hr_db
+
+REDIS_HOST=redis
+REDIS_PORT=6379

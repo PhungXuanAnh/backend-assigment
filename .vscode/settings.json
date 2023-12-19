@@ -1,0 +1,24 @@
+{
+    "cSpell.words": [
+        "Iury",
+        "Jcew",
+        "Mnsnh",
+        "musican",
+        "paginations"
+    ],
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": true, 
+        "editor.formatOnSaveMode": "file",
+        // Black is the uncompromising Python code formatter. https://github.com/psf/black
+        // to test run : black source_folder
+        "editor.defaultFormatter": "ms-python.black-formatter" // modifications
+    },
+    // NOTE: all these below config can be done by file .vscode/python.env
+    "python.autoComplete.extraPaths": [
+        "${workspaceFolder}/src"
+    ],
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/src"
+    ]
+}
