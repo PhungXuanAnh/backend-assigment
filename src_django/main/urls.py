@@ -17,9 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from swagger.views import SwaggerView
+import debug_toolbar
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/", include("employee.urls")),
     path("swagger/", SwaggerView.with_ui("swagger", cache_timeout=0)),
+    path("__debug__/", include(debug_toolbar.urls))
 ]

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_yasg",
     "employee",
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -52,7 +53,12 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware"
 ]
+
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK": lambda _: DEBUG,
+}
 
 ROOT_URLCONF = "main.urls"
 
@@ -158,6 +164,7 @@ REST_FRAMEWORK = {
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        # "BACKEND": "django.core.cache.backends.dummy.DummyCache",
         "LOCATION": "redis://redis:6379/3",
     }
 }
