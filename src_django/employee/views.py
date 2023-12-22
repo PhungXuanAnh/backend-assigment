@@ -14,7 +14,7 @@ class EmployeeListAPIView(CustomizedPagination, views.APIView):
 
     def get_queryset(self, query: QueryParamsSerializer, user):
         if company := query.get("company"):
-            queryset = Employee.objects.filter(company__name=company).select_related("company")
+            queryset = Employee.objects.filter(company__name=company)
         elif user.is_superuser:
             queryset = Employee.objects.all()
         else:
@@ -23,13 +23,16 @@ class EmployeeListAPIView(CustomizedPagination, views.APIView):
         if status := query.get("status"):
             queryset = queryset.filter(status__in=status)
         if location := query.get("location"):
-            queryset = queryset.filter(location__name=location).select_related("location")
+            queryset = queryset.filter(location__name=location)
         if department := query.get("department"):
-            queryset = queryset.filter(department__name=department).select_related("location")
+            queryset = queryset.filter(department__name=department)
         if position := query.get("position"):
-            queryset = queryset.filter(position__name=position).select_related("location")
+            queryset = queryset.filter(position__name=position)
 
-        return queryset.order_by("-id")
+        return queryset.order_by("-id").order_by("-id").select_related(
+            "company", "department", "position",
+            "location"
+        )
 
     def get_dynamic_fields(self, company):
         all_fields = list(EmployeeSerializer().get_fields().keys())
